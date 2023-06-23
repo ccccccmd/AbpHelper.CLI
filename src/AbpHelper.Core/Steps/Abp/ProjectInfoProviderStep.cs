@@ -21,22 +21,22 @@ namespace EasyAbp.AbpHelper.Core.Steps.Abp
             var excludeDirectories = await context.EvaluateAsync(ExcludeDirectories, cancellationToken);
             LogInput(() => excludeDirectories, string.Join("; ", excludeDirectories));
 
-            TemplateType templateType;
-            if (FileExistsInDirectory(baseDirectory, "*.Host.Shared.csproj", excludeDirectories) || FileExistsInDirectory(baseDirectory, "*.Installer.csproj", excludeDirectories))
-            {
-                templateType = TemplateType.Module;
-            }
-            else if (FileExistsInDirectory(baseDirectory, "*.DbMigrator.csproj", excludeDirectories))
-            {
-                templateType = TemplateType.Application;
-            }
-            else
-            {
-                throw new NotSupportedException($"Unknown ABP project structure. Directory: {baseDirectory}");
-            }
+            TemplateType templateType= TemplateType.Application;
+            //if (FileExistsInDirectory(baseDirectory, "*.Host.Shared.csproj", excludeDirectories) || FileExistsInDirectory(baseDirectory, "*.Installer.csproj", excludeDirectories))
+            //{
+            //    templateType = TemplateType.Module;
+            //}
+            //else if (FileExistsInDirectory(baseDirectory, "*.DbMigrator.csproj", excludeDirectories))
+            //{
+            //    templateType = TemplateType.Application;
+            //}
+            //else
+            //{
+            //    throw new NotSupportedException($"Unknown ABP project structure. Directory: {baseDirectory}");
+            //}
 
             // Assume the domain project must be existed for an ABP project
-            var domainCsprojFile = SearchFileInDirectory(baseDirectory, "*.Domain.csproj", excludeDirectories);
+            var domainCsprojFile = SearchFileInDirectory(baseDirectory, "*.Domain.csproj", excludeDirectories,true);
             if (domainCsprojFile == null)
                 throw new NotSupportedException(
                     $"Cannot find the domain project file. Make sure it is a valid ABP project. Directory: {baseDirectory}");
@@ -48,6 +48,10 @@ namespace EasyAbp.AbpHelper.Core.Steps.Abp
             if (FileExistsInDirectory(baseDirectory, "*.cshtml", excludeDirectories))
             {
                 uiFramework = UiFramework.RazorPages;
+            }
+            else if (FileExistsInDirectory(baseDirectory, "vite.config.ts", excludeDirectories))
+            {
+                uiFramework = UiFramework.Vben;
             }
             else if (FileExistsInDirectory(baseDirectory, "app.module.ts", excludeDirectories))
             {

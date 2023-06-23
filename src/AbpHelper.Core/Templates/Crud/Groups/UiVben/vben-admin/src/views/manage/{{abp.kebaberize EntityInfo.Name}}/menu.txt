@@ -1,0 +1,11 @@
+
+{
+   path: '{{abp.kebaberize EntityInfo.Name }}',
+   name: '{{abp.kebaberize EntityInfo.Name }}',
+   meta: {
+       title: t('{{abp.kebaberize EntityInfo.Name }}'),
+       ignoreKeepAlive: true,
+       roles: ['{{ProjectInfo.Name}}.{{EntityInfo.Name }}'],
+   },
+   component: () => import('/@/views/manage/{{abp.kebaberize EntityInfo.Name }}/index.vue'),
+}

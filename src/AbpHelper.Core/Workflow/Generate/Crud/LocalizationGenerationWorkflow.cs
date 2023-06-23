@@ -22,7 +22,7 @@ namespace EasyAbp.AbpHelper.Core.Workflow.Generate.Crud
                         step =>
                         {
                             step.SearchDirectoryName = "Localization";
-                            step.BaseDirectory = new JavaScriptExpression<string>(@"`${AspNetCoreDir}/src/${ProjectInfo.FullName}.Domain.Shared`");
+                            step.BaseDirectory = new JavaScriptExpression<string>(@"`${AspNetCoreDir}/services/${ProjectInfo.FullName}.Domain.Shared`");
                         }
                     )
                     .Then<MultiFileFinderStep>(

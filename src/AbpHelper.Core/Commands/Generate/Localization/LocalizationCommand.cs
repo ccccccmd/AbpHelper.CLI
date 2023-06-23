@@ -39,7 +39,7 @@ namespace EasyAbp.AbpHelper.Core.Commands.Generate.Localization
                     step =>
                     {
                         step.SearchDirectoryName = "Localization";
-                        step.BaseDirectory = new JavaScriptExpression<string>(@"`${AspNetCoreDir}/src/${ProjectInfo.FullName}.Domain.Shared`");
+                        step.BaseDirectory = new JavaScriptExpression<string>(@"`${AspNetCoreDir}/services/${ProjectInfo.FullName}.Domain.Shared`");
                     }
                 )
                 .Then<MultiFileFinderStep>(

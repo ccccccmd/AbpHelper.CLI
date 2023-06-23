@@ -1,9 +1,9 @@
 {
 {{~ if !Option.SkipPermissions ~}}
-    "Permission:{{ EntityInfo.Name }}": "{{ EntityInfo.Name }}",
-    "Permission:Create": "Create",
-    "Permission:Update": "Update",
-    "Permission:Delete": "Delete",
+    "{{ EntityInfo.Name }}": "{{ EntityInfo.Name }}",
+    "Create": "Create",
+    "Update": "Update",
+    "Delete": "Delete",
 {{~ end ~}}
     "Menu:{{ EntityInfo.Name }}": "Menu{{ EntityInfo.Name }}",
     "{{ EntityInfo.Name }}": "{{ EntityInfo.Name }}",

@@ -40,6 +40,7 @@ namespace EasyAbp.AbpHelper.Core.Models
     {
         None,
         RazorPages,
-        Angular
+        Angular,
+        Vben
     }
 }

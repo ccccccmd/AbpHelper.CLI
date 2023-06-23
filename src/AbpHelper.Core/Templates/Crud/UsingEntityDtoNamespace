@@ -1,1 +1,1 @@
-using {{ EntityInfo.Namespace}}.Dtos;
+using {{ ProjectInfo.FullName }}.Admin.{{EntityInfo.Name}}_App.Dtos;

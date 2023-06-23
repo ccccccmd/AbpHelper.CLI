@@ -107,7 +107,10 @@ namespace EasyAbp.AbpHelper.Core.Commands.Generate.Crud
 
                                     @switch.When(UiFramework.Angular.ToString("D"))
                                         // TODO
-                                        //.AddUiAngularGenerationWorkflow()
+                                        .AddUiAngularGenerationWorkflow()
+                                        .Then(TestGeneration);
+                                    @switch.When(UiFramework.Vben.ToString("D"))
+                                        .AddUiVbenGenerationWorkflow()
                                         .Then(TestGeneration);
                                 }
                             )
@@ -124,7 +127,7 @@ namespace EasyAbp.AbpHelper.Core.Commands.Generate.Crud
                     {
                         ifElse
                             .When(OutcomeNames.False)
-                            .AddTestGenerationWorkflow()
+                     
                             .Then(DbMigrations)
                             ;
                         ifElse

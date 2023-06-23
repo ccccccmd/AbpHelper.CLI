@@ -33,24 +33,24 @@ This argument takes effect only if '--skip-db-migrations' is NOT specified.";
         public string DtoSuffix { get; set; } = null!;
 
         [Option("skip-custom-repository", Description = "Skip generating custom repository interface and class for the entity")]
-        public bool SkipCustomRepository { get; set; }
+        public bool SkipCustomRepository { get; set; } = true;
 
         [Option("skip-db-migrations", Description = "Skip performing db migration and update")]
-        public bool SkipDbMigrations { get; set; }
+        public bool SkipDbMigrations { get; set; } = true;
 
         [Option("skip-ui", Description = "Skip generating UI")]
-        public bool SkipUi { get; set; }
+        public bool SkipUi { get; set; } = true;
 
         [Option("skip-view-model", Description = "Skip generating 'CreateUpdateViewModel`, use 'CreateUpdateDto' directly")]
-        public bool SkipViewModel { get; set; }
+        public bool SkipViewModel { get; set; } = true;
 
         [Option("skip-localization", Description = "Skip generating localization")]
-        public bool SkipLocalization { get; set; }
+        public bool SkipLocalization { get; set; } = true;
 
         [Option("skip-test", Description = "Skip generating test")]
-        public bool SkipTest { get; set; }
+        public bool SkipTest { get; set; } = true;
 
         [Option("skip-entity-constructors", Description = "Skip generating constructors for the entity")]
-        public bool SkipEntityConstructors { get; set; }
+        public bool SkipEntityConstructors { get; set; } = true;
     }
 }

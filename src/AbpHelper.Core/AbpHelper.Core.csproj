@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <PackageId>EasyAbp.AbpHelper.Core</PackageId>
+    <PackageId>EasyAbp.AbpHelper.Core.Vben</PackageId>
     <AssemblyName>EasyAbp.AbpHelper.Core</AssemblyName>
     <RootNamespace>EasyAbp.AbpHelper.Core</RootNamespace>
     <LangVersion>10.0</LangVersion>
@@ -41,5 +41,4 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
 </Project>

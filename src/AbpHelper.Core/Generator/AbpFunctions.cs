@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using Humanizer;
 using Microsoft.CodeAnalysis;
 using Scriban.Runtime;
 using Volo.Abp.Http;
@@ -19,13 +21,22 @@ namespace EasyAbp.AbpHelper.Core.Generator
                 .Select(part => part.ToKebabCase());
             return string.Join('.', parts);
         }
-        
+
+        public static string Kebaberize(string text)
+        {
+            var parts = text.Split('.')
+                .Select(part => part.Kebaberize());
+            return string.Join('.', parts);
+        }
+
         public static string CamelCase(string text)
         {
             var parts = text.Split('.')
                 .Select(part => part.ToCamelCase());
             return string.Join('.', parts);
         }
+
+
 
         public static bool IsIgnoreProperty(PropertyInfo propertyInfo)
         {
@@ -103,5 +114,44 @@ namespace EasyAbp.AbpHelper.Core.Generator
         {
             return collection1.Intersect(collection2).ToList();
         }
+
+
+        public static string CamelCaseUi(string str)
+        {
+            if (string.IsNullOrEmpty(str) || !char.IsUpper(str[0]))
+                return str;
+
+            char[] chars = str.ToCharArray();
+            int length = chars.Length;
+
+            for (int i = 0; i < length; i++)
+            {
+                if (i == 1 && !char.IsUpper(chars[i]))
+                    break;
+
+                bool hasNext = i + 1 < length;
+
+                if (i > 0 && hasNext && !char.IsUpper(chars[i + 1]))
+                {
+                    if (IsSeparator(chars[i + 1]))
+                        chars[i] = char.ToLower(chars[i]);
+
+                    break;
+                }
+
+                chars[i] = char.ToLower(chars[i]);
+            }
+
+            return new string(chars); 
+            static bool IsSeparator(char str)
+            {
+                string pattern = @"[\s\u2000-\u206F\u2E00-\u2E7F\\'!""#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]+";
+                return Regex.IsMatch(str.ToString(), pattern);
+            }
+        }
+
+
+
+
     }
 }
