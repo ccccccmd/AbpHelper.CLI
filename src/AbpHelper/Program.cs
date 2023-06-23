@@ -32,13 +32,17 @@ namespace EasyAbp.AbpHelper
             Console.WriteLine("请输入项目名称:");
             var projectName = Console.ReadLine();
 
-            Console.WriteLine($"请输入项目根目录（{projectName}.sln所在目录）:");
+
+            Console.WriteLine($"请输入项目根目录:");
             var rootPath = Console.ReadLine();
-            var slnFile = Path.Combine(rootPath, $"{projectName}.sln");
+
+            var aspnetcoreDirExists = Directory.Exists(Path.Combine(rootPath, "aspnet-core"));
+
+            var slnFile = Path.Combine(rootPath, aspnetcoreDirExists ? "aspnet-core" : "", $"{projectName}.sln");
             if (!File.Exists(slnFile))
             {
                 Console.WriteLine(
-                    $"The solution file '{projectName}.sln' is not found in '{rootPath}'. Make sure you specific the right folder.");
+                    $"The solution file '{projectName}.sln' is not found in '{Path.Combine(rootPath, aspnetcoreDirExists ? "aspnet-core" : "")}'. Make sure you specific the right folder.");
                 Console.ReadKey();
                 return;
             }
@@ -47,7 +51,8 @@ namespace EasyAbp.AbpHelper
 
 
             var entityName = Console.ReadLine();
-            var entityFilePath = Path.Combine(rootPath, "services", "DEC.Domain");
+            var entityFilePath = Path.Combine(rootPath, aspnetcoreDirExists ? "aspnet-core" : "", "services",
+                $"{projectName}.Domain");
             if (!SearchFileRecursive(entityFilePath, $"{entityName}.cs"))
             {
                 Console.WriteLine(

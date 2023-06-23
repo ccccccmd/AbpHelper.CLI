@@ -14,7 +14,7 @@ namespace EasyAbp.AbpHelper.Core.Workflow.Generate.Crud
                         step =>
                         {
                             step.GroupName = "UiVben"; 
-                            step.TargetDirectory = new JavaScriptExpression<string>(VariableNames.AspNetCoreDir);
+                            step.TargetDirectory = new JavaScriptExpression<string>("BaseDirectory");
                         }
                     ).WithName("UiVben")
                 
