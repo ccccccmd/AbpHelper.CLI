@@ -11,7 +11,7 @@ export function useDataTable() {
   const { getList, deleteById } = new {{EntityInfo.Name}}Service();
   const [registerTable, { reload: reloadTable }] = useTable({
     rowKey: 'id',
-    title: t('{{EntityInfo.Name}}列表'),
+    title: t('列表'),
     columns: getDataColumns(),
     api: getList,
     beforeFetch: formatPagedRequest,

@@ -3,10 +3,10 @@
     <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button
-          v-if="hasPermission('AbpIdentity.Roles.Create')"
+          v-if="hasPermission('{{ProjectInfo.Name}}.{{EntityInfo.Name }}.Create')"
           type="primary"
           @click="handleAddNew"
-          >{{ "{{ " }} t("添加{{EntityInfo.Name}}") {{ "}} " }}</a-button
+          >{{ "{{ " }} t("添加") {{ "}} " }}</a-button
         >
       </template>
       <template #action="{ record }">
@@ -31,7 +31,7 @@
         />
       </template>
     </BasicTable>
-    <RoleModal @register="registerModal" @change="reloadTable" />
+    <CreateEditModal @register="registerModal" @change="reloadTable" />
   </div>
 </template>
 
@@ -40,7 +40,7 @@ import { defineComponent } from "vue";
 import { useI18n } from "/@/hooks/web/useI18n";
 import { usePermission } from "/@/hooks/web/usePermission";
 import { useModal } from "/@/components/Modal";
-import RoleModal from "./DataModal.vue";
+import CreateEditModal from "./DataModal.vue";
 import { PermissionModal } from "/@/components/Permission";
 import { BasicTable, TableAction } from "/@/components/Table";
 import { useDataTable } from "../hooks/useDataTable";
@@ -49,8 +49,7 @@ export default defineComponent({
   name: "DataTable",
   components: {
     BasicTable,
-
-    RoleModal,
+    CreateEditModal,
     TableAction,
     PermissionModal,
   },
@@ -67,7 +66,6 @@ export default defineComponent({
       reloadTable,
       registerModal,
       openModal,
-
       handleDelete,
     };
   },

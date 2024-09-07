@@ -10,7 +10,17 @@
     :showOkBtn="false"
     @cancel="cancelModal"
   >
-    <BasicForm @register="registerForm" @submit="handleSubmit" :showResetButton="false" />
+    <BasicForm @register="registerForm" @submit="handleSubmit" :showResetButton="false" :show-submit-button="false">
+      <template #formFooter>
+        <div style="width: 100%; text-align: right">
+          <FormItem>
+            <Button type="default" class="mr-2" @click="cancelModal">取消</Button>
+            <Button type="primary" class="mr-2" @click="submit" :loading="loading">保存
+            </Button>
+          </FormItem>
+        </div>
+      </template>
+    </BasicForm>
   </BasicModal>
 </template>
 
@@ -21,19 +31,20 @@ import { BasicForm, useForm } from '/@/components/Form';
 import { BasicModal, useModalInner } from '/@/components/Modal';
 import { getModalFormSchemas } from '../datas/ModalData';
 import { useDataModal } from '../hooks/useDataModal';
-
+import {Button} from "ant-design-vue";
 export default defineComponent({
   name: '',
-  components: { BasicForm, BasicModal },
+  components: { BasicForm, BasicModal,Button },
   emits: ['change'],
   setup(_props, { emit }) {
     const { t } = useI18n();
     const formTitle = ref<string>('');
 
     const modal = useDataModal();
-
+    const loading = ref(false);
     const [registerModal, { closeModal }] = useModalInner((val: any) => {
       resetFields();
+      loading.value = false;
       if (val?.id) {
         setFieldsValue(val);
         formTitle.value = '编辑';
@@ -44,7 +55,7 @@ export default defineComponent({
       modal.init({ value: val, updateSchema });
     });
 
-    const [registerForm, { setFieldsValue, resetFields, updateSchema }] = useForm({
+    const [registerForm, { setFieldsValue, resetFields, updateSchema,submit }] = useForm({
       labelWidth: 120,
       submitButtonOptions: { text: '保存' },
       schemas: [...getModalFormSchemas()],
@@ -55,14 +66,16 @@ export default defineComponent({
     });
 
     const handleSubmit = (val: any) => {
+      loading.value = true;
       modal.save(val).then(() => {
         closeModal();
         emit('change');
+        loading.value = false;
       });
     };
 
     const cancelModal = () => {
-      modal.cancel();
+      closeModal();
     };
     return {
       t,
@@ -70,7 +83,7 @@ export default defineComponent({
       registerModal,
       registerForm,
       cancelModal,
-      handleSubmit,
+      handleSubmit,submit,loading
     };
   },
 });
