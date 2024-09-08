@@ -34,7 +34,7 @@ using Volo.Abp.Application.Services;
 {{~ if Option.SkipCustomRepository ~}}
 using Volo.Abp.Domain.Repositories;
 {{~ end ~}}
-
+using Microsoft.AspNetCore.Authorization;
 namespace {{ ProjectInfo.FullName }}.Admin.{{EntityInfo.Name}}_App;
 
 {{~
@@ -49,12 +49,15 @@ end ~}}
 /// {{ EntityInfo.Document }}
 /// </summary>
 {{~ end ~}}
+{{~ if !Option.SkipPermissions ~}}
+[Authorize({{ permissionNamesPrefix }}.Default)]
+{{~ end ~}}
 public class {{ EntityInfo.Name }}AppService : {{ crudClassName }}<{{ EntityInfo.Name }}, {{ DtoInfo.ReadTypeName }}, {{ EntityInfo.PrimaryKey ?? EntityInfo.CompositeKeyName }}, {{TGetListInput}}, {{ DtoInfo.CreateTypeName }}, {{ DtoInfo.UpdateTypeName }}>,
     I{{ EntityInfo.Name }}AppService
 {
     {{~ if !Option.SkipPermissions ~}}
-    protected override string GetPolicyName { get; set; } = {{ permissionNamesPrefix }}.Default;
-    protected override string GetListPolicyName { get; set; } = {{ permissionNamesPrefix }}.Default;
+    protected override string GetPolicyName { get; set; } = {{ permissionNamesPrefix }}.Get;
+    protected override string GetListPolicyName { get; set; } = {{ permissionNamesPrefix }}.GetList;
     protected override string CreatePolicyName { get; set; } = {{ permissionNamesPrefix }}.Create;
     protected override string UpdatePolicyName { get; set; } = {{ permissionNamesPrefix }}.Update;
     protected override string DeletePolicyName { get; set; } = {{ permissionNamesPrefix }}.Delete;

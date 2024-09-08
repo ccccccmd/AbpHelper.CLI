@@ -2,8 +2,17 @@
 permissionVarName = EntityInfo.Name | abp.camel_case + "Permission"
 permissionNamesPrefix = ProjectInfo.Name + "Permissions." + EntityInfo.Name+"_Permissions"
 ~}}
+{{~
+    if EntityInfo.Document | !string.whitespace
+        defaultVarName = EntityInfo.Document
+    else
+        defaultVarName = EntityInfo.Name
+end ~}}
 
-        var {{ permissionVarName }} = {{ Bag.GroupName }}.AddPermission({{ permissionNamesPrefix }}.Default, L("{{ EntityInfo.Name }}"));
+
+        var {{ permissionVarName }} = {{ Bag.GroupName }}.AddPermission({{ permissionNamesPrefix }}.Default, L("{{ defaultVarName }}"));
+        {{ permissionVarName }}.AddChild({{ permissionNamesPrefix }}.Get, L("Get"));
+        {{ permissionVarName }}.AddChild({{ permissionNamesPrefix }}.GetList, L("List"));
         {{ permissionVarName }}.AddChild({{ permissionNamesPrefix }}.Create, L("Create"));
         {{ permissionVarName }}.AddChild({{ permissionNamesPrefix }}.Update, L("Update"));
         {{ permissionVarName }}.AddChild({{ permissionNamesPrefix }}.Delete, L("Delete"));

@@ -6,6 +6,8 @@
     public class {{ EntityInfo.Name }}_Permissions
     {
         public const string Default = GroupName + ".{{ EntityInfo.Name }}";
+        public const string Get = Default + ".Get";
+        public const string GetList = Default + ".GetList";
         public const string Update = Default + ".Update";
         public const string Create = Default + ".Create";
         public const string Delete = Default + ".Delete";
