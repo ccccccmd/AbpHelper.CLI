@@ -35,6 +35,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 {{~ end ~}}
 using Microsoft.AspNetCore.Authorization;
+
 namespace {{ ProjectInfo.FullName }}.Admin.{{EntityInfo.Name}}_App;
 
 {{~

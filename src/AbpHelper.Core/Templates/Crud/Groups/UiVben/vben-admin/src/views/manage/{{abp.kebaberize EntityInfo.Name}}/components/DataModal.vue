@@ -1,14 +1,15 @@
 <template>
   <BasicModal
-    v-bind="$attrs"
-    :useWrapper="true"
-    :title="formTitle"
-    @register="registerModal"
-    :bodyStyle="{ 'padding-top': '0' }"
-    :destroyOnClose="true"
-    :showCancelBtn="false"
-    :showOkBtn="false"
-    @cancel="cancelModal"
+      v-bind="$attrs"
+      :useWrapper="true"
+      :title="formTitle"
+      :width="800"
+      @register="registerModal"
+      :bodyStyle="{ 'padding-top': '0' }"
+      :destroyOnClose="true"
+      :showCancelBtn="false"
+      :showOkBtn="false"
+      @cancel="cancelModal"
   >
     <BasicForm @register="registerForm" @submit="handleSubmit" :showResetButton="false" :show-submit-button="false">
       <template #formFooter>

@@ -10,7 +10,7 @@
     <LangVersion>10.0</LangVersion>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     <Nullable>enable</Nullable>
-    <PackageVersion>0.19.1</PackageVersion>
+    <PackageVersion>0.19.2</PackageVersion>
     <Description>A fork of https://github.com/EasyAbp/AbpHelper.CLI.
 Generate Vben UI CRUD for https://github.com/NameIsBad/abp-vue.</Description>
     <PackageProjectUrl>https://github.com/ccccccmd/AbpHelper.CLI</PackageProjectUrl>
